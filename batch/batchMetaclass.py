@@ -1,0 +1,4 @@
+class BatchMetaClass(type):
+    pass
+
+
