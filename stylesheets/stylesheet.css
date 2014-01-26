@@ -262,7 +262,7 @@ Full-Width Styles
     width: 100%;
 }
 
-.outer-head img{
+.outer-head{
     width: 100%;
     height: 250px;
 }
@@ -378,7 +378,7 @@ Full-Width Styles
     background: #212121;
 }
 
-.onyx-image{
+.onyx-image img{
     float: right;
     right: -250px;
 }
