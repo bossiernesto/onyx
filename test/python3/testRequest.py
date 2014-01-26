@@ -1,8 +1,5 @@
 import unittest
 
-from
-
-
 class RequestTestCase(unittest.TestCase):
 
     def __init__(self):

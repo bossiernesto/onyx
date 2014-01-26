@@ -69,7 +69,7 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
                 super(B, self).__init__()
                 self.arg1 = arg1
                 self.arg2 = arg2
-                raise TypeError, 'some type error'
+                raise TypeError('some type error')
 
         self.assertRaises(TypeError, B.getInstance, 1, 2)
 
@@ -173,12 +173,12 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
                     if fSleepTime > 0:
                         time.sleep(fSleepTime)
                     Test_Singleton.getInstance()
-                except Exception, e:
+                except Exception as e:
                     self._eException = e
 
         fTargetTime = time.time() + 0.1
         lstThreads = []
-        for _ in xrange(100):
+        for _ in range(100):
             t = Test_SingletonThread(fTargetTime)
             t.start()
             lstThreads.append(t)
