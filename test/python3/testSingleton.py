@@ -2,6 +2,7 @@ import unittest
 import time
 from useful.singleton import *
 
+
 class singletonmixin_Public_TestCase(unittest.TestCase):
     def testReturnsSameObject(self):
         """
@@ -23,7 +24,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         """
 
         class B(Singleton):
-
             def __init__(self, arg1, arg2):
                 super(B, self).__init__()
                 self.arg1 = arg1
@@ -38,7 +38,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
     def testInstantiateWithKeywordArg(self):
 
         class B(Singleton):
-
             def __init__(self, arg1=5):
                 super(B, self).__init__()
                 self.arg1 = arg1
@@ -51,7 +50,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
     def testTryToInstantiateWithoutNeededArgs(self):
 
         class B(Singleton):
-
             def __init__(self, arg1, arg2):
                 super(B, self).__init__()
                 self.arg1 = arg1
@@ -63,8 +61,8 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         """
         Make sure the test for capturing missing args doesn't interfere with a normal TypeError.
         """
-        class B(Singleton):
 
+        class B(Singleton):
             def __init__(self, arg1, arg2):
                 super(B, self).__init__()
                 self.arg1 = arg1
@@ -99,10 +97,8 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
 
         self.assertRaises(SingletonException, instantiatedAnIllegalClass)
 
-
     def testDontAllowArgsAfterConstruction(self):
         class B(Singleton):
-
             def __init__(self, arg1, arg2):
                 super(B, self).__init__()
                 self.arg1 = arg1
@@ -115,6 +111,7 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         class A(Singleton):
             def __init__(self):
                 super(A, self).__init__()
+
         class B(A):
             def __init__(self):
                 super(B, self).__init__()
@@ -140,6 +137,7 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
 
         class A(Singleton):
             ciInitCount = 0
+
             def __init__(self):
                 super(A, self).__init__()
                 A.ciInitCount += 1
@@ -169,7 +167,7 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
 
             def run(self):
                 try:
-                    fSleepTime =  self._fTargetTime - time.time()
+                    fSleepTime = self._fTargetTime - time.time()
                     if fSleepTime > 0:
                         time.sleep(fSleepTime)
                     Test_Singleton.getInstance()
@@ -207,7 +205,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
     def testMultipleGetInstancesWithArgs(self):
 
         class A(Singleton):
-
             ignoreSubsequent = True
 
             def __init__(self, a, b=1):
@@ -217,7 +214,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         A.getInstance(2) # ignores the second call because of ignoreSubsequent
 
         class B(Singleton):
-
             def __init__(self, a, b=1):
                 pass
 
@@ -225,7 +221,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         self.assertRaises(SingletonException, B.getInstance, 2) # No ignoreSubsequent included
 
         class C(Singleton):
-
             def __init__(self, a=1):
                 pass
 
@@ -240,7 +235,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
         """
 
         class A(Singleton):
-
             def setX(self, x):
                 self.x = x
 
@@ -248,7 +242,6 @@ class singletonmixin_Public_TestCase(unittest.TestCase):
                 raise NotImplementedError
 
         class B(A):
-
             def setX(self, x):
                 self.x = -x
 

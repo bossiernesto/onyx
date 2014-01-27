@@ -2,7 +2,7 @@
 .. module:: Onyx Observer Mixin
    :platform: Linux
    :synopsis: Simple Observer Mixin
-   :copyright: (c) 2013 by Ernesto Bossi.
+   :copyright: (c) 2013-2014 by Ernesto Bossi.
    :license: BSD.
 
 .. moduleauthor:: Ernesto Bossi <bossi.ernestog@gmail.com>

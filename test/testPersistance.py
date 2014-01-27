@@ -1,4 +1,4 @@
-from persistance.documents import JSONDocument, XMLDocument, CSVDocument,json_session, csv_session, xml_session, FileDocument
+from .persistance.documents import JSONDocument, XMLDocument, CSVDocument,json_session, csv_session, xml_session, FileDocument
 import os
 import unittest
 from config.AppContext import appContext

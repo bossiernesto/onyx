@@ -133,7 +133,7 @@ def _createSingletonInstance(cls, lstArgs, dctKwArgs):
         try:
             instance.__init__(*lstArgs, **dctKwArgs)
         except TypeError as e:
-            if e.message.find('__init__() takes') != -1:
+            if e.args[0].find('__init__()') != -1:
                 raise SingletonException('If the singleton requires __init__ args, supply them on first call to getInstance().')
             else:
                 raise

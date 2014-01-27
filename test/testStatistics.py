@@ -17,7 +17,7 @@ class TestStatistics(unittest.TestCase):
         self.settings.setAgent()
         self.settings.setCharset()
         import getpass
-        self.settings.setProxyHandler(user=getpass.getuser(),password='mongo2013')
+        self.settings.setProxyHandler(user=getpass.getuser(),password='')
         self.req=Request(self.settings)
 
     def testLogStatistics(self):

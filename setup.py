@@ -16,6 +16,6 @@ setup(name='Onyx',
       data_files=[
           (templates_dir, templates_files)
       ],
-      install_requires=['lxml', 'simplejson', 'json', 'coucbdb', 'elixir', 'pymongo', 'ordereddict', 'PIL']
+      install_requires=['lxml', 'simplejson', 'json', 'coucbdb', 'elixir', 'pymongo', 'PIL']
       #TODO: fill another dependecies
 )

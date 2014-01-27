@@ -1,5 +1,5 @@
 from unittest import TestCase
-from Onyxparser import UrlFinder
+from .onyxparser.htmlParser.url import UrlFinder
 from resource import resource
 
 class testUrlFinder(TestCase):
@@ -8,7 +8,7 @@ class testUrlFinder(TestCase):
         import getpass
         self.settings = resource.request_settings()
         self.buildRequests()
-        self.settings.setProxyHandler(user=getpass.getuser(),password='mongo2013')
+        self.settings.setProxyHandler(user=getpass.getuser(),password='')
 
     def buildRequests(self):
         self.settings.setAgent()
