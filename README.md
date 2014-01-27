@@ -1,4 +1,4 @@
-# Onyx Spider Framework
+# Onyx Scrapper Framework
 
 ![IMAGE](/raw/onyx.jpeg)
 
