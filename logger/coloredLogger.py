@@ -7,6 +7,7 @@ FORMAT = "[$BOLD%(name)-s$RESET][%(levelname)-s]  %(message)s ($BOLD%(filename)s
 # Custom logger class with multiple destinations
 class ColoredLogger(AbstractLogger):
     COLOR_FORMAT = c.formatter_message(FORMAT, True)
+
     def __init__(self, name):
         logging.Logger.__init__(self, name, logging.DEBUG)
 

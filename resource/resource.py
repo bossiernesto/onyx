@@ -13,7 +13,7 @@ from abc import ABCMeta, abstractmethod
 from cookie import cookiejar
 from hooks.hooks import chunk_report, sanitizeHtml
 from useful.observableMixin import *
-from useful.common import wrapException, bufferOptimalSize, reportRun, formatBlock, toKB, fixZeroResult, timeNow, delay
+from useful.common import wrap_exception, buffer_optimal_size, report_run, format_block, toKB, fixZeroResult, time_now, delay
 from ResourceHelper import *
 from RequestStatistics import RequestStatistics
 from Handlers.SmartRedirectorHandler import SmartRedirectHandler, NoRedirectionHandler
@@ -208,7 +208,7 @@ class Request(object, Subject):
         self.speed = toKB(self.total_size / runtime)
 
     #@benchmark # for debug purposes
-    @reportRun
+    @report_run
     @notify
     def getRequest(self, url, parameters=None, request_hooks=list()):
         """Main GetRequest action to get the contents of a url. Can attack a hook per request and selects an action
@@ -227,8 +227,8 @@ class Request(object, Subject):
         except urllib2.HTTPError, e:
             #catch any low level Exception and retrow it
             self.status_code = e.code
-            self.notifyValues(status_code=self.status_code, timestamp=timeNow()) #notificate
-            wrapException(ex.RequestException,
+            self.notifyValues(status_code=self.status_code, timestamp=time_now()) #notificate
+            wrap_exception(ex.RequestException,
                           "Exception with request {0} error code {1}, reason {2}".format(self, e.code, e.reason))
 
     def setRequestData(self, request):
@@ -248,8 +248,8 @@ class Request(object, Subject):
         #Check if it's a file
         content = self.info.getheader('Content-Length')
         self.total_size = 0 if content is None else int(content.strip())
-        self.chunkSize = bufferOptimalSize(self.total_size)
-        if not ResourceHelper.isReadable(self.info):
+        self.chunkSize = buffer_optimal_size(self.total_size)
+        if not ResourceHelper.is_readable(self.info):
             self.isFile = True
             self._action_set(requestFile())
 
@@ -275,7 +275,7 @@ class Request(object, Subject):
                     for hook in chunk_hooks:
                         hook(bytes_so_far, chunk_size, self.total_size)
                 except Exception:
-                    raise wrapException(ex.HookException(), "Problem with hook {0}".format(hook))
+                    raise wrap_exception(ex.HookException(), "Problem with hook {0}".format(hook))
             #if self.settings.statistics is not None:
         #    RequestStatistics.getInstance().updateTransmited(bytes_so_far)
         return "".join(data)
@@ -306,7 +306,7 @@ class Request(object, Subject):
 
                         '''.format(self.redirections, self.history)
 
-        return formatBlock(requestResumee)
+        return format_block(requestResumee)
 
 
 class requestHTML(object):
@@ -319,7 +319,7 @@ class requestHTML(object):
                 try:
                     hook(responseBuffer, response)
                 except ex.HookException:
-                    raise wrapException(ex.HookException(), "Problem with hook {0}".format(hook))
+                    raise wrap_exception(ex.HookException(), "Problem with hook {0}".format(hook))
         self._actionRequest(responseBuffer, response)
 
     @abstractmethod
@@ -345,7 +345,7 @@ class requestFile(requestHTML):
         #save file from buffer and log it before to send it to the container
         from persistance.documents import FileDocument
 
-        request.fileName = ResourceHelper.getBaseName(request.url)
+        request.fileName = ResourceHelper.get_base_name(request.url)
         FileDocument.writeAndClose(request.fileName, responseBuffer)
         request.raw(responseBuffer)
 

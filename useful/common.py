@@ -50,19 +50,19 @@ def add_to_path(path):
         sys.path.insert(0, path)
 
 
-def OnyxExceptionWrap():
-    wrapException(ex.OnyxException(), "Onyx Spider General Exception")
+def onyx_wrap_exception():
+    wrap_exception(ex.OnyxException(), "Onyx Spider General Exception")
 
 
-def logException():
+def log_exception():
     import traceback
     from config.AppContext import getOnyxLogger
 
     log = getOnyxLogger()
-    logIfPossible(traceback.format_exc(), log, 'error')
+    log_if_possible(traceback.format_exc(), log, 'error')
 
 
-def wrapException(exceptionName, message):
+def wrap_exception(exceptionName, message):
     from config.AppContext import appContext
 
     trace = sys.exc_info()[2]
@@ -71,7 +71,7 @@ def wrapException(exceptionName, message):
     except ex.ConfigError:
         value = 0
     if value == 1:
-        logException()
+        log_exception()
     raise exceptionName(message).with_traceback(trace)
 
 
@@ -103,11 +103,11 @@ def isObjOfType(obj, _type):
     return type(obj) in ([_type] + _type.__subclasses__())
 
 
-def bufferOptimalSize(IOSize):
+def buffer_optimal_size(IOSize):
     return 16384 if IOSize < 1 * 1024 * 1024 or IOSize == 0 else 32 * 1024
 
 
-def reportRun(func):
+def report_run(func):
     """
     A decorator that calls a reportRuntime method to report runtime.
     """
@@ -193,7 +193,7 @@ def fixZeroResult(result):
 
 # http://code.activestate.com/recipes/145672-multi-line-string-block-formatting/
 
-def formatBlock(block):
+def format_block(block):
     """Format the given block of text, trimming leading/trailing
     empty lines and any leading whitespace that is common to all lines.
     The purpose is to let us list a code block as a multiline,
@@ -229,13 +229,13 @@ isFileNull = lambda file: os.stat(file)[6] == 0
 goodStatusCode = lambda code: 200 <= code < 300
 #Logging
 
-def logIfPossible(msg, logger=None, level='info'):
+def log_if_possible(msg, logger=None, level='info'):
     if logger:
         try:
             log = getattr(logger, level)
             log(msg)
         except AttributeError:
-            wrapException(ex.LoggerException, 'Invalid logger method')
+            wrap_exception(ex.LoggerException, 'Invalid logger method')
     else:
         print(msg)
 
@@ -245,9 +245,9 @@ def logBeforeAfter(before, after, logger=None, level='info'):
         @wraps(f)
         def f_logbefaft(*args, **kwargs):
             mbefore, mafter = before, after
-            logIfPossible(mbefore, logger, level)
+            log_if_possible(mbefore, logger, level)
             ret = f(*args, **kwargs)
-            logIfPossible(mbefore, logger, level)
+            log_if_possible(mbefore, logger, level)
             return ret
 
         return f_logbefaft
@@ -255,7 +255,7 @@ def logBeforeAfter(before, after, logger=None, level='info'):
     return deco_logBeforeAfter
 
 
-def timeNow():
+def time_now():
     from datetime import datetime
 
     return datetime.now()
@@ -263,6 +263,6 @@ def timeNow():
 
 #Introspection
 
-def getCurrentMethodName():
+def get_current_method_name():
     """Auxiliary function to not to do DRY"""
     return inspect.stack()[1][3]

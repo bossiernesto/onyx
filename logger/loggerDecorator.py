@@ -1,6 +1,16 @@
+"""
+.. module:: Onyx Logger Decorator
+   :platform: Linux
+   :synopsis: decorator to show up information in a fashioned way
+   :copyright: (c) 2013-2014 by Ernesto Bossi.
+   :license: BSD.
+
+.. moduleauthor:: Ernesto Bossi <bossi.ernestog@gmail.com>
+"""
+
 from abc import ABCMeta
 import logging
-from useful.common import getCurrentMethodName
+from useful.common import get_current_method_name
 
 
 class AbstractLogger(logging.Logger, metaclass=ABCMeta):
@@ -32,18 +42,17 @@ class DecoratorLogger(AbstractLogger):
         for logger in self.loggers:
             getattr(logger, func)(msg, args, kwargs)
 
-    #TODO: clean this to call only the inner method of this functions
     def critical(self, msg, *args, **kwargs):
-        self.execLogger(getCurrentMethodName(), msg, args, kwargs)
+        self.execLogger(get_current_method_name(), msg, args, kwargs)
 
     def error(self, msg, *args, **kwargs):
-        self.execLogger(getCurrentMethodName(), msg, args, kwargs)
+        self.execLogger(get_current_method_name(), msg, args, kwargs)
 
     def warning(self, msg, *args, **kwargs):
-        self.execLogger(getCurrentMethodName(), msg, args, kwargs)
+        self.execLogger(get_current_method_name(), msg, args, kwargs)
 
     def info(self, msg, *args, **kwargs):
-        self.execLogger(getCurrentMethodName(), msg, args, kwargs)
+        self.execLogger(get_current_method_name(), msg, args, kwargs)
 
     def debug(self, msg, *args, **kwargs):
-        self.execLogger(getCurrentMethodName(), msg, args, kwargs)
+        self.execLogger(get_current_method_name(), msg, args, kwargs)

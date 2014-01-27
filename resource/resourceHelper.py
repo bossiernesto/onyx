@@ -25,7 +25,7 @@ TYPE_PNG = 'image/png'
 
 class ResourceHelper(Singleton):
     @staticmethod
-    def isReadable(info):
+    def is_readable(info):
         readable = [TYPE_HTML, TYPE_XML, TYPE_JSON]
         try:
             for r in readable:
@@ -48,7 +48,7 @@ class ResourceHelper(Singleton):
         return urllib.parse.quote(urlNew.encode('utf-8'), safe="%/:=&?~#+!$,;'@()*[]")
 
     @staticmethod
-    def quoteCollection(collection, prefix='', quote_via=quote_plus, safe="/"):
+    def quote_collection(collection, prefix='', quote_via=quote_plus, safe="/"):
         """
         Quote for collection of resources of urls.
         """
@@ -119,15 +119,15 @@ class ResourceHelper(Singleton):
         return '&'.join(l)
 
     @staticmethod
-    def getBaseName(url):
+    def get_base_name(url):
         """
         Get base of the url.
         """
-        filename, file_ext = ResourceHelper.getFileAndExt(url)
+        filename, file_ext = ResourceHelper.get_file_and_ext(url)
         return filename + file_ext
 
     @staticmethod
-    def getFileAndExt(url):
+    def get_file_and_ext(url):
         from urllib.parse import urlparse
         from os.path import splitext, basename
 
@@ -135,7 +135,7 @@ class ResourceHelper(Singleton):
         return splitext(basename(disassembled.path))
 
     @staticmethod
-    def getPrePostUrl(url):
+    def get_pre_post_url(url):
         """
         separate url base from the parameters that form part of the post data.
         """

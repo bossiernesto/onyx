@@ -1,7 +1,7 @@
 import string
 from abc import abstractmethod, ABCMeta
 from resource import Request
-from useful.common import retry, wrapException
+from useful.common import retry, wrap_exception
 from onyxexceptions import RequestException
 
 #TODO: Finish this class up (add Validations,authentication)
@@ -40,7 +40,7 @@ class requestManager(object):
                 response = req.getRequest(url, request_hooks=self.requestHooks)
             except Exception:
                 #TODO: Create new Exception to reraise, check from status code if it's an HTPPError and see if some low level settings must be ajusted
-                wrapException(RequestException, 'Request failed')
+                wrap_exception(RequestException, 'Request failed')
         return response
 
 #Abstract class

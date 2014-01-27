@@ -11,7 +11,7 @@ class TestStatistics(unittest.TestCase):
         self.linkses=['http://es.wikipedia.org/wiki/','http://fluxbox.org/']
 
     def tearDown(self):
-        self.statistics.clearStatistics()
+        self.statistics.clear_statistics()
 
     def buildRequests(self):
         self.settings.setAgent()

@@ -1,7 +1,7 @@
 #TODO: finish this module
 import pickle
 from persistance.documents.file_doc import FileDocument
-from useful.common import wrapException
+from useful.common import wrap_exception
 from onyxexceptions import OnyxException, NotOfTypeException
 
 import weakref
@@ -65,7 +65,7 @@ class Pickeable():
             self.objs.add(obj)
             FileDocument.writeAndClose(self.filename, self.objs)
         except (IOError, NotOfTypeException) as e:
-            wrapException(OnyxException, 'Raised an exception of type {0}'.format(e))
+            wrap_exception(OnyxException, 'Raised an exception of type {0}'.format(e))
 
     def getObjects(self):
         descriptor = self.pickleJar.getDescriptor()

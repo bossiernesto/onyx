@@ -30,7 +30,7 @@ class TestResourceHelper(TestCase):
     def test_multiple_quoting(self):
         workingEncoding = "%20to:".join([quote2(record) for record in self.address_list])
         self.assertEqual(workingEncoding,
-                         ResourceHelper.quoteCollection(self.address_list, prefix=" to:", safe=self.safe,
+                         ResourceHelper.quote_collection(self.address_list, prefix=" to:", safe=self.safe,
                                                         quote_via=urllib.parse.quote))
 
     def test_single_encoding(self):
@@ -38,9 +38,9 @@ class TestResourceHelper(TestCase):
 
     def test_base_name(self):
         url = 'http://css3menu.com/download/css3menu-setup.zip?utm_source=free_downl_win&utm_medium=email&utm_campaign=css3_downl_link'
-        self.assertEqual('css3menu-setup.zip', ResourceHelper.getBaseName(url))
+        self.assertEqual('css3menu-setup.zip', ResourceHelper.get_base_name(url))
 
     def test_pre_post_url(self):
         url = 'http://trade.nosis.com/Captcha?isHard=True&t=635018086580569985?captchaValue=AQY7C5'
         self.assertEqual(('http://trade.nosis.com/Captcha', 'isHard=True&t=635018086580569985?captchaValue=AQY7C5'),
-                         ResourceHelper.getPrePostUrl(url))
+                         ResourceHelper.get_pre_post_url(url))

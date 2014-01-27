@@ -16,7 +16,7 @@ class ObservableData(Subject, object):
         self._data = value
 
     @notify
-    def updateValue(self, value):
+    def update_value(self, value):
         print("Update with value,{0}".format(value))
         self.data = value
 
@@ -32,7 +32,7 @@ class TestObserver(TestCase):
         self.observer = ObserverOverseer()
         self.data.attach(self.observer)
 
-    def testUpdate(self):
-        self.data.updateValue(4)
+    def test_update(self):
+        self.data.update_value(4)
         self.assertEquals(self.data.data, 4)
         self.assertEquals(self.observer.data, 5)

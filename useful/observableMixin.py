@@ -32,7 +32,7 @@ class Subject:
     def notifyValues(self, modifier=None, *args, **kwargs):
         for observer in self._observers:
             if modifier != observer:
-                observer.updateValues(self, *args, **kwargs)
+                observer.update_values(self, *args, **kwargs)
 
 
 class Observer:
@@ -41,7 +41,7 @@ class Observer:
         raise NotImplementedError
 
     @abstractmethod
-    def updateValues(self, subject, *args, **kwargs):
+    def update_values(self, subject, *args, **kwargs):
         raise NotImplementedError
 
 

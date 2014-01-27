@@ -1,3 +1,12 @@
+"""
+.. module:: Onyx Mock of Logging Handler
+   :platform: Linux
+   :synopsis: Mock logger to get messages, and test coloured decorator for logger
+   :copyright: (c) 2012-2013 by Ernesto Bossi.
+   :license: BSD.
+
+.. moduleauthor:: Ernesto Bossi <bossi.ernestog@gmail.com>
+"""
 import logging
 from pyparsing import *
 
@@ -8,7 +17,7 @@ escapeSeq = Combine(ESC + '[' + Optional(delimitedList(integer, ';')) +
 
 nonAnsiString = lambda s: Suppress(escapeSeq).transformString(s)
 
-#Mock logger to get messages
+
 class MockLoggingHandler(logging.Handler):
     """Mock logging handler to check for expected logs."""
 
