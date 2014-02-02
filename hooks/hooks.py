@@ -12,11 +12,5 @@ def chunk_report(bytes_so_far, chunk_size, total_size):
         sys.stdout.write('\n')
 
 
-def save_history_hook(buffer, request):
+def save_history_hook(request):
     request.history.append({'request': request, 'response': request.response})
-
-
-def sanitizeHtml(responseBuffer, response):
-    from html import htmlsanitizer
-
-    responseBuffer = htmlsanitizer.sanitize_html(responseBuffer)
