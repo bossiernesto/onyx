@@ -1,5 +1,9 @@
 #Base handler class
 class BaseHandler(object):
+    def __init__(self, *args, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
     def add_parent(self, parent_handler):
         self.parents.append(parent_handler)
 
@@ -7,6 +11,19 @@ class BaseHandler(object):
         for parent in self.parents:
             parent.close
         self.parents = []
+
+
+class ProxyHandler(BaseHandler):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        try:
+            self.http = self.http
+            self.accept_ssl = False
+        except AttributeError:
+            self.accept_ssl = True
+
+    def get_schema(self):
+        return self.https if self.accept_ssl else self.http
 
 
 #Redirections

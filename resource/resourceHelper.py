@@ -141,4 +141,7 @@ class ResourceHelper(Singleton):
         """
         return url.split('?')[0], '?'.join(url.split('?')[1:])
 
-
+    @staticmethod
+    def get_domain(url):
+        parsed_uri = urllib.parse.urlparse(url)
+        return '{uri.scheme}://{uri.netloc}/'.format(uri=parsed_uri)
